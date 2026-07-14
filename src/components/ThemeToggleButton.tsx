@@ -1,7 +1,5 @@
-import { Moon, Sun} from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useThemeStore } from '../store/useThemeStore';
-import Button from './button';
-
 
 export function ThemeToggleButton() {
   const { theme, setTheme } = useThemeStore();
@@ -12,28 +10,26 @@ export function ThemeToggleButton() {
   };
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
+    <button
       onClick={cycleTheme}
-      title={`Current: ${theme} • Click to cycle`}
-      className="fixed top-4 right-4 h-10 w-10 rounded-full"
+      title={`Toggle Theme (Current: ${theme})`}
+      className="p-1.5 hover:text-[#C79A3B] transition-colors flex items-center justify-center relative"
     >
       <Sun
-        className={`h-[1.2rem] w-[1.2rem] transition-all ${
+        className={`h-4.5 w-4.5 transition-all duration-300 ${
           theme === 'light'
             ? 'rotate-0 scale-100'
             : 'rotate-90 scale-0'
         }`}
       />
       <Moon
-        className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${
+        className={`absolute h-4.5 w-4.5 transition-all duration-300 ${
           theme === 'dark'
             ? 'rotate-0 scale-100'
             : 'rotate-90 scale-0'
         }`}
       />
       <span className="sr-only">Toggle theme</span>
-    </Button>
+    </button>
   );
 }
