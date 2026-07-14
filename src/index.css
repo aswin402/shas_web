@@ -172,3 +172,32 @@
   backdrop-filter: blur(12px);
   border: 1px solid rgba(51, 45, 64, 0.4);
 }
+
+/* Dark Mode Utility Class Overrides for Hardcoded Light Colors */
+.dark .bg-\[\#F8F6F2\] {
+  background-color: var(--background) !important;
+}
+.dark .bg-white {
+  background-color: var(--card) !important;
+}
+.dark .bg-\[\#EFE6DC\]\/30 {
+  background-color: rgba(38, 34, 48, 0.4) !important;
+}
+.dark .text-\[\#2A2A2A\] {
+  color: var(--foreground) !important;
+}
+.dark .text-\[\#805E63\] {
+  color: var(--tagline-muted) !important;
+}
+.dark .text-\[\#5C0F24\] {
+  color: var(--secondary) !important;
+}
+.dark .border-\[\#EFE6DC\] {
+  border-color: var(--border) !important;
+}
+.dark .divide-\[\#C79A3B\]\/30 > * + * {
+  border-color: var(--border) !important;
+}
+.dark .divide-\[\#EFE6DC\] > * + * {
+  border-color: var(--border) !important;
+}
