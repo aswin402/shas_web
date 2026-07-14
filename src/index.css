@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.6);
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+:root {
+  /* 60% Dominant Color (Luxury Ivory Cream) */
+  --background: #F8F6F2;
+  --card: #FFFFFF;
+  --popover: #FFFFFF;
+  --card-foreground: #2A2A2A;
+  --popover-foreground: #2A2A2A;
+
+  /* 30% Secondary Colors (Deep Maroon / Burgundy) */
+  --foreground: #2A2A2A;
+  --text-dark: #2A2A2A;
+  --primary: #5C0F24; /* Primary Burgundy */
+  --primary-foreground: #FFFFFF;
+  --tagline-muted: #805E63; /* Tagline Muted */
+  --muted: #F8F6F2;
+  --muted-foreground: #805E63;
+  --border: #EFE6DC;
+  --input: #EFE6DC;
+
+  /* 10% Accent Colors (Champagne Gold) */
+  --secondary: #C79A3B; /* Secondary Gold */
+  --secondary-foreground: #FFFFFF;
+  --accent: #C79A3B;
+  --accent-foreground: #FFFFFF;
+  --ring: #C79A3B;
+
+  /* System */
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* 60% Dominant (Charcoal Midnight Plum) */
+  --background: #16141D;
+  --card: #1E1B26;
+  --popover: #1E1B26;
+  --card-foreground: #F5F3F7;
+  --popover-foreground: #F5F3F7;
+
+  /* 30% Secondary */
+  --foreground: #F5F3F7;
+  --text-dark: #F5F3F7;
+  --primary: #580F1B; /* Primary Maroon stays constant for brand consistency */
+  --primary-foreground: #FFFFFF;
+  --tagline-muted: #B5939D; /* Lightened Muted Crimson for dark mode readability */
+  --muted: #262230;
+  --muted-foreground: #B5939D;
+  --border: #332D40;
+  --input: #332D40;
+
+  /* 10% Accent */
+  --secondary: #B58E3D; /* Secondary Gold */
+  --secondary-foreground: #16141D;
+  --accent: #B58E3D;
+  --accent-foreground: #16141D;
+  --ring: #B58E3D;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-medium tracking-wide;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Premium micro-interactions & utility classes */
+.gold-glow {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.gold-glow:hover {
+  box-shadow: 0 0 15px rgba(229, 169, 36, 0.45);
+}
+
+.maroon-glow {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.maroon-glow:hover {
+  box-shadow: 0 0 15px rgba(166, 28, 46, 0.35);
+}
+
+.text-gold {
+  color: var(--secondary);
+}
+
+.bg-gold {
+  background-color: var(--secondary);
+}
+
+.border-gold {
+  border-color: var(--secondary);
+}
+
+.bg-maroon {
+  background-color: var(--primary);
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tagline-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Glassmorphic card styling */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 222, 207, 0.5);
+}
+
+.dark .glass-card {
+  background: rgba(30, 27, 38, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 45, 64, 0.4);
+}
