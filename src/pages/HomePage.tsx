@@ -178,66 +178,68 @@ export function HomePage() {
       {/* 1. HERO SECTION */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen bg-[#F8F6F2] flex items-center pt-24 pb-16 lg:py-0 overflow-hidden"
+        className="relative min-h-[calc(100vh-64px)] lg:h-[calc(100vh-96px)] mt-16 lg:mt-24 bg-[#F8F6F2] flex items-stretch overflow-hidden"
       >
-        <div className="w-full max-w-[1560px] mx-auto px-6 md:px-12 lg:px-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center relative z-10">
+        <div className="w-full max-w-[1560px] mx-auto flex flex-col lg:flex-row items-stretch relative z-10 pl-6 md:pl-12 lg:pl-24 pr-6 md:pr-12 lg:pr-0">
           {/* Left column content */}
-          <div className="col-span-1 lg:col-span-5 text-left space-y-8 py-4 lg:py-16">
-            <div className="space-y-4">
-              <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[60px] xl:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
-                {HERO_SLIDES[currentSlide].title.split('\n').map((line, i) => (
-                  <span key={i} className="block">{line}</span>
-                ))}
-              </h1>
-              <p className="hero-text-slide text-sm sm:text-base leading-relaxed text-[#805E63] font-sans max-w-md">
-                {HERO_SLIDES[currentSlide].subtitle}
-              </p>
-            </div>
-            
-            <div className="hero-text-slide flex flex-wrap gap-4 pt-2">
-              <Link 
-                to={HERO_SLIDES[currentSlide].linkUrl}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C79A3B] hover:bg-[#5C0F24] text-[#F8F6F2] uppercase tracking-wider text-xs font-semibold transition-all duration-300 shadow-md hover:shadow-lg rounded-none"
-              >
-                {HERO_SLIDES[currentSlide].linkText} &rarr;
-              </Link>
-            </div>
+          <div className="w-full lg:w-[46%] flex items-center pr-6 py-12 lg:py-16">
+            <div className="space-y-8 w-full">
+              <div className="space-y-4">
+                <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[60px] xl:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
+                  {HERO_SLIDES[currentSlide].title.split('\n').map((line, i) => (
+                    <span key={i} className="block">{line}</span>
+                  ))}
+                </h1>
+                <p className="hero-text-slide text-sm sm:text-base leading-relaxed text-[#805E63] font-sans max-w-md">
+                  {HERO_SLIDES[currentSlide].subtitle}
+                </p>
+              </div>
+              
+              <div className="hero-text-slide flex flex-wrap gap-4 pt-2">
+                <Link 
+                  to={HERO_SLIDES[currentSlide].linkUrl}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C79A3B] hover:bg-[#5C0F24] text-[#F8F6F2] uppercase tracking-wider text-xs font-semibold transition-all duration-300 shadow-md hover:shadow-lg rounded-none"
+                >
+                  {HERO_SLIDES[currentSlide].linkText} &rarr;
+                </Link>
+              </div>
 
-            {/* Inlined small USPs with elegant thin outline badges */}
-            <div className="hero-text-anim pt-8 grid grid-cols-3 gap-4 border-t border-[#EFE6DC] mt-10 text-left font-sans text-[10px] text-[#2A2A2A]">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
-                  <ShoppingBag className="w-3.5 h-3.5" />
+              {/* Inlined small USPs with elegant thin outline badges */}
+              <div className="hero-text-anim pt-8 grid grid-cols-3 gap-4 border-t border-[#EFE6DC] mt-10 text-left font-sans text-[10px] text-[#2A2A2A]">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
+                    <ShoppingBag className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold leading-tight">Premium Quality</h4>
+                    <p className="text-[9px] text-[#805E63]">Crafted to last</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold leading-tight">Premium Quality</h4>
-                  <p className="text-[9px] text-[#805E63]">Crafted to last</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold leading-tight">Easy Returns</h4>
+                    <p className="text-[9px] text-[#805E63]">30-day return</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold leading-tight">Easy Returns</h4>
-                  <p className="text-[9px] text-[#805E63]">30-day return</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold leading-tight">Secure Payments</h4>
-                  <p className="text-[9px] text-[#805E63]">100% protected</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold leading-tight">Secure Payments</h4>
+                    <p className="text-[9px] text-[#805E63]">100% protected</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right column image container (Fully responsive) */}
-          <div className="col-span-1 lg:col-span-7 w-full flex justify-center lg:justify-end lg:pl-10">
-            <div className="relative w-full max-w-md sm:max-w-xl lg:max-w-none h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] xl:h-[620px] overflow-hidden rounded-[30px_80px_30px_80px] lg:rounded-l-[45%_50%] lg:rounded-r-none border border-[#C79A3B]/10 shadow-2xl bg-white">
+          {/* Right column image container (Stretches vertically, flush to right) */}
+          <div className="w-full lg:w-[54%] flex items-stretch relative">
+            <div className="relative w-full h-[320px] sm:h-[420px] lg:h-auto overflow-hidden rounded-[30px_80px_30px_80px] lg:rounded-l-[45%_50%] lg:rounded-r-none border-l border-[#C79A3B]/10 shadow-2xl bg-white flex items-stretch">
               <img
                 src={HERO_SLIDES[currentSlide].image}
                 alt="Luxury jewelry design showcase"
