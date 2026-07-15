@@ -178,13 +178,13 @@ export function HomePage() {
       {/* 1. HERO SECTION */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen bg-[#F8F6F2] flex flex-col lg:flex-row lg:items-center overflow-hidden pt-16 pb-16"
+        className="relative min-h-screen bg-[#F8F6F2] flex items-center pt-24 pb-16 lg:py-0 overflow-hidden"
       >
-        {/* Left column content aligned to container grid */}
-        <div className="w-full max-w-[1560px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 flex flex-col lg:flex-row items-center">
-          <div className="w-full lg:w-[45%] text-left space-y-8 py-12 lg:py-24">
+        <div className="w-full max-w-[1560px] mx-auto px-6 md:px-12 lg:px-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center relative z-10">
+          {/* Left column content */}
+          <div className="col-span-1 lg:col-span-5 text-left space-y-8 py-4 lg:py-16">
             <div className="space-y-4">
-              <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
+              <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[60px] xl:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
                 {HERO_SLIDES[currentSlide].title.split('\n').map((line, i) => (
                   <span key={i} className="block">{line}</span>
                 ))}
@@ -234,61 +234,33 @@ export function HomePage() {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Right side absolute full-bleed image on desktop */}
-        <div className="hero-image-anim absolute right-0 top-16 bottom-0 w-full lg:w-[44%] xl:w-[48%] h-[calc(100%-64px)] z-0 hidden lg:block">
-          <div className="w-full h-full relative overflow-hidden rounded-l-[45%_50%] border-l border-[#C79A3B]/10 shadow-2xl bg-white">
-            <img
-              src={HERO_SLIDES[currentSlide].image}
-              alt="Luxury jewelry design showcase"
-              className="hero-image-slide w-full h-full object-cover"
-            />
-            {/* Minimal slider navigation overlay */}
-            <div className="absolute bottom-8 right-8 bg-[#F8F6F2]/90 backdrop-blur-md border border-[#EFE6DC] px-5 py-2.5 flex items-center gap-4 text-[10px] uppercase tracking-widest font-semibold text-[#5C0F24] rounded-full shadow-md pointer-events-auto">
-              <button 
-                onClick={handlePrevSlide} 
-                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
-                title="Previous slide"
-              >
-                &larr;
-              </button>
-              <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
-              <button 
-                onClick={handleNextSlide} 
-                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
-                title="Next slide"
-              >
-                &rarr;
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile-only relative image block */}
-        <div className="w-full lg:hidden px-6 pb-16 relative z-10">
-          <div className="relative aspect-[4/3] w-full max-w-sm mx-auto overflow-hidden rounded-3xl border border-[#C79A3B]/20 shadow-lg bg-white p-1">
-            <img
-              src={HERO_SLIDES[currentSlide].image}
-              alt="Luxury jewelry design showcase mobile"
-              className="hero-image-slide w-full h-full object-cover rounded-2xl"
-            />
-            <div className="absolute bottom-4 right-4 bg-[#F8F6F2]/90 backdrop-blur-sm border border-[#EFE6DC] px-4 py-2 flex items-center gap-3 text-[9px] uppercase tracking-wider font-semibold text-[#5C0F24] rounded-full shadow-sm">
-              <button 
-                onClick={handlePrevSlide} 
-                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
-                title="Previous slide"
-              >
-                &larr;
-              </button>
-              <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
-              <button 
-                onClick={handleNextSlide} 
-                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
-                title="Next slide"
-              >
-                &rarr;
-              </button>
+          {/* Right column image container (Fully responsive) */}
+          <div className="col-span-1 lg:col-span-7 w-full flex justify-center lg:justify-end lg:pl-10">
+            <div className="relative w-full max-w-md sm:max-w-xl lg:max-w-none h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] xl:h-[620px] overflow-hidden rounded-[30px_80px_30px_80px] lg:rounded-l-[45%_50%] lg:rounded-r-none border border-[#C79A3B]/10 shadow-2xl bg-white">
+              <img
+                src={HERO_SLIDES[currentSlide].image}
+                alt="Luxury jewelry design showcase"
+                className="hero-image-slide w-full h-full object-cover"
+              />
+              {/* Minimal slider navigation overlay */}
+              <div className="absolute bottom-6 right-6 bg-[#F8F6F2]/90 backdrop-blur-md border border-[#EFE6DC] px-5 py-2.5 flex items-center gap-4 text-[10px] uppercase tracking-widest font-semibold text-[#5C0F24] rounded-full shadow-md z-20 pointer-events-auto">
+                <button 
+                  onClick={handlePrevSlide} 
+                  className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                  title="Previous slide"
+                >
+                  &larr;
+                </button>
+                <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
+                <button 
+                  onClick={handleNextSlide} 
+                  className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                  title="Next slide"
+                >
+                  &rarr;
+                </button>
+              </div>
             </div>
           </div>
         </div>
