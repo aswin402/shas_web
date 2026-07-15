@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/shas_web/',
+  base: process.env.GITHUB_ACTIONS === 'true' ? '/shas_web/' : '/',
   plugins: [
     react(),
     tailwindcss(),
