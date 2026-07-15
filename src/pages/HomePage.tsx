@@ -53,47 +53,68 @@ export function HomePage() {
   const { addToCart, toggleCart, toggleWishlist, wishlist } = useAppStore();
   const [email, setEmail] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const isAnimatingRef = useRef(false);
 
-  const startAutoplay = () => {
-    stopAutoplay();
-    slideTimerRef.current = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
-    }, 3000);
-  };
+  const changeSlide = (nextIndex: number) => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
 
-  const stopAutoplay = () => {
-    if (slideTimerRef.current) {
-      clearInterval(slideTimerRef.current);
-    }
+    // 1. Fade out current content
+    gsap.to('.hero-text-slide', {
+      opacity: 0,
+      y: -15,
+      duration: 0.35,
+      stagger: 0.04,
+      ease: 'power2.in',
+      onComplete: () => {
+        // 2. Change state
+        setCurrentSlide(nextIndex);
+        // 3. Fade in new content
+        gsap.fromTo('.hero-text-slide',
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
+        );
+      }
+    });
+
+    gsap.to('.hero-image-slide', {
+      opacity: 0.3,
+      scale: 1.02,
+      duration: 0.35,
+      ease: 'power2.in',
+      onComplete: () => {
+        // Fade in and scale down the new image
+        gsap.fromTo('.hero-image-slide',
+          { opacity: 0.3, scale: 1.06 },
+          { 
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.8, 
+            ease: 'power2.out',
+            onComplete: () => {
+              isAnimatingRef.current = false;
+            }
+          }
+        );
+      }
+    });
   };
 
   const handleNextSlide = () => {
-    setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
-    startAutoplay();
+    changeSlide((currentSlide + 1) % HERO_SLIDES.length);
   };
 
   const handlePrevSlide = () => {
-    setCurrentSlide(prev => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-    startAutoplay();
+    changeSlide((currentSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   };
 
+  // Autoplay with 10 seconds delay - resets automatically when currentSlide changes
   useEffect(() => {
-    startAutoplay();
-    return () => stopAutoplay();
-  }, []);
+    const timer = setInterval(() => {
+      changeSlide((currentSlide + 1) % HERO_SLIDES.length);
+    }, 10000);
 
-  // Slide transition animation
-  useEffect(() => {
-    gsap.fromTo('.hero-text-slide', 
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
-    );
-    
-    gsap.fromTo('.hero-image-slide',
-      { opacity: 0.4, scale: 1.05 },
-      { opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' }
-    );
+    return () => clearInterval(timer);
   }, [currentSlide]);
 
   const bestSellers = PRODUCTS.filter(p => p.tag === 'Best Seller').slice(0, 5);
