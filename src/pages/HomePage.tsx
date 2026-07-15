@@ -178,91 +178,117 @@ export function HomePage() {
       {/* 1. HERO SECTION */}
       <section 
         ref={heroRef}
-        className="relative min-h-[calc(100vh-64px)] lg:h-[calc(100vh-96px)] mt-16 lg:mt-24 bg-[#F8F6F2] flex items-stretch overflow-hidden"
+        className="relative min-h-[450px] lg:h-[550px] mt-0 lg:mt-8 bg-[#F8F6F2] flex items-center overflow-hidden"
       >
-        <div className="w-full max-w-[1560px] mx-auto flex flex-col lg:flex-row items-stretch relative z-10 pl-6 md:pl-12 lg:pl-24 pr-6 md:pr-12 lg:pr-0">
-          {/* Left column content */}
-          <div className="w-full lg:w-[46%] flex items-center pr-6 py-12 lg:py-16">
-            <div className="space-y-8 w-full">
-              <div className="space-y-4">
-                <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[60px] xl:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
-                  {HERO_SLIDES[currentSlide].title.split('\n').map((line, i) => (
-                    <span key={i} className="block">{line}</span>
-                  ))}
-                </h1>
-                <p className="hero-text-slide text-sm sm:text-base leading-relaxed text-[#805E63] font-sans max-w-md">
-                  {HERO_SLIDES[currentSlide].subtitle}
-                </p>
-              </div>
-              
-              <div className="hero-text-slide flex flex-wrap gap-4 pt-2">
-                <Link 
-                  to={HERO_SLIDES[currentSlide].linkUrl}
-                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C79A3B] hover:bg-[#5C0F24] text-[#F8F6F2] uppercase tracking-wider text-xs font-semibold transition-all duration-300 shadow-md hover:shadow-lg rounded-none"
-                >
-                  {HERO_SLIDES[currentSlide].linkText} &rarr;
-                </Link>
-              </div>
+        {/* Left column content aligned to container grid */}
+        <div className="w-full max-w-[1560px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 flex flex-col lg:flex-row items-center h-full">
+          <div className="w-full lg:w-[46%] text-left space-y-8 py-8 lg:py-0">
+            <div className="space-y-4">
+              <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[60px] xl:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
+                {HERO_SLIDES[currentSlide].title.split('\n').map((line, i) => (
+                  <span key={i} className="block">{line}</span>
+                ))}
+              </h1>
+              <p className="hero-text-slide text-sm sm:text-base leading-relaxed text-[#805E63] font-sans max-w-md">
+                {HERO_SLIDES[currentSlide].subtitle}
+              </p>
+            </div>
+            
+            <div className="hero-text-slide flex flex-wrap gap-4 pt-2">
+              <Link 
+                to={HERO_SLIDES[currentSlide].linkUrl}
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C79A3B] hover:bg-[#5C0F24] text-[#F8F6F2] uppercase tracking-wider text-xs font-semibold transition-all duration-300 shadow-md hover:shadow-lg rounded-none"
+              >
+                {HERO_SLIDES[currentSlide].linkText} &rarr;
+              </Link>
+            </div>
 
-              {/* Inlined small USPs with elegant thin outline badges */}
-              <div className="hero-text-anim pt-8 grid grid-cols-3 gap-4 border-t border-[#EFE6DC] mt-10 text-left font-sans text-[10px] text-[#2A2A2A]">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold leading-tight">Premium Quality</h4>
-                    <p className="text-[9px] text-[#805E63]">Crafted to last</p>
-                  </div>
+            {/* Inlined small USPs with elegant thin outline badges */}
+            <div className="hero-text-anim pt-8 grid grid-cols-3 gap-4 border-t border-[#EFE6DC] mt-10 text-left font-sans text-[10px] text-[#2A2A2A]">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
+                  <ShoppingBag className="w-3.5 h-3.5" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
-                    <RotateCcw className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold leading-tight">Easy Returns</h4>
-                    <p className="text-[9px] text-[#805E63]">30-day return</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold leading-tight">Premium Quality</h4>
+                  <p className="text-[9px] text-[#805E63]">Crafted to last</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold leading-tight">Secure Payments</h4>
-                    <p className="text-[9px] text-[#805E63]">100% protected</p>
-                  </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="font-semibold leading-tight">Easy Returns</h4>
+                  <p className="text-[9px] text-[#805E63]">30-day return</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#EFE6DC]/30 border border-[#EFE6DC] flex items-center justify-center text-[#C79A3B]">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <h4 className="font-semibold leading-tight">Secure Payments</h4>
+                  <p className="text-[9px] text-[#805E63]">100% protected</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Right column image container (Stretches vertically, flush to right) */}
-          <div className="w-full lg:w-[54%] flex items-stretch relative">
-            <div className="relative w-full h-[320px] sm:h-[420px] lg:h-auto overflow-hidden rounded-[30px_80px_30px_80px] lg:rounded-l-[45%_50%] lg:rounded-r-none border-l border-[#C79A3B]/10 shadow-2xl bg-white flex items-stretch">
-              <img
-                src={HERO_SLIDES[currentSlide].image}
-                alt="Luxury jewelry design showcase"
-                className="hero-image-slide w-full h-full object-cover"
-              />
-              {/* Minimal slider navigation overlay */}
-              <div className="absolute bottom-6 right-6 bg-[#F8F6F2]/90 backdrop-blur-md border border-[#EFE6DC] px-5 py-2.5 flex items-center gap-4 text-[10px] uppercase tracking-widest font-semibold text-[#5C0F24] rounded-full shadow-md z-20 pointer-events-auto">
-                <button 
-                  onClick={handlePrevSlide} 
-                  className="hover:text-[#C79A3B] transition-colors cursor-pointer"
-                  title="Previous slide"
-                >
-                  &larr;
-                </button>
-                <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
-                <button 
-                  onClick={handleNextSlide} 
-                  className="hover:text-[#C79A3B] transition-colors cursor-pointer"
-                  title="Next slide"
-                >
-                  &rarr;
-                </button>
-              </div>
+        {/* Right side absolute full-bleed image on desktop - touches top, bottom, and screen right edge */}
+        <div className="hero-image-anim absolute right-0 top-0 bottom-0 w-full lg:w-[50%] z-0 hidden lg:block">
+          <div className="w-full h-full relative overflow-hidden rounded-l-[45%_50%] border-l border-[#C79A3B]/10 shadow-2xl bg-white flex items-stretch">
+            <img
+              src={HERO_SLIDES[currentSlide].image}
+              alt="Luxury jewelry design showcase"
+              className="hero-image-slide w-full h-full object-cover"
+            />
+            {/* Minimal slider navigation overlay */}
+            <div className="absolute bottom-8 right-8 bg-[#F8F6F2]/90 backdrop-blur-md border border-[#EFE6DC] px-5 py-2.5 flex items-center gap-4 text-[10px] uppercase tracking-widest font-semibold text-[#5C0F24] rounded-full shadow-md z-20 pointer-events-auto">
+              <button 
+                onClick={handlePrevSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Previous slide"
+              >
+                &larr;
+              </button>
+              <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
+              <button 
+                onClick={handleNextSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Next slide"
+              >
+                &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile-only relative image block */}
+        <div className="w-full lg:hidden px-6 pb-12 relative z-10">
+          <div className="relative aspect-[4/3] w-full max-w-sm mx-auto overflow-hidden rounded-3xl border border-[#C79A3B]/20 shadow-lg bg-white p-1">
+            <img
+              src={HERO_SLIDES[currentSlide].image}
+              alt="Luxury jewelry design showcase mobile"
+              className="hero-image-slide w-full h-full object-cover rounded-2xl"
+            />
+            <div className="absolute bottom-4 right-4 bg-[#F8F6F2]/90 backdrop-blur-sm border border-[#EFE6DC] px-4 py-2 flex items-center gap-3 text-[9px] uppercase tracking-wider font-semibold text-[#5C0F24] rounded-full shadow-sm">
+              <button 
+                onClick={handlePrevSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Previous slide"
+              >
+                &larr;
+              </button>
+              <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
+              <button 
+                onClick={handleNextSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Next slide"
+              >
+                &rarr;
+              </button>
             </div>
           </div>
         </div>
