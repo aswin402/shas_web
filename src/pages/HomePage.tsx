@@ -55,39 +55,47 @@ export function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const isAnimatingRef = useRef(false);
 
-  const changeSlide = (nextIndex: number) => {
+  const changeSlide = (nextIndex: number, direction: 'next' | 'prev' = 'next') => {
     if (isAnimatingRef.current) return;
     isAnimatingRef.current = true;
 
-    // 1. Fade out current content
+    // Define direction-specific slide values
+    const textOutX = direction === 'next' ? -25 : 25;
+    const textInX = direction === 'next' ? 25 : -25;
+    const imageOutX = direction === 'next' ? -40 : 40;
+    const imageInX = direction === 'next' ? 40 : -40;
+
+    // 1. Slide and fade out current content
     gsap.to('.hero-text-slide', {
       opacity: 0,
-      y: -15,
+      x: textOutX,
       duration: 0.35,
       stagger: 0.04,
       ease: 'power2.in',
       onComplete: () => {
         // 2. Change state
         setCurrentSlide(nextIndex);
-        // 3. Fade in new content
+        // 3. Slide and fade in new content
         gsap.fromTo('.hero-text-slide',
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
+          { opacity: 0, x: textInX },
+          { opacity: 1, x: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
         );
       }
     });
 
     gsap.to('.hero-image-slide', {
       opacity: 0.3,
-      scale: 1.02,
+      x: imageOutX,
+      scale: 1.01,
       duration: 0.35,
       ease: 'power2.in',
       onComplete: () => {
-        // Fade in and scale down the new image
+        // Slide and fade in new image
         gsap.fromTo('.hero-image-slide',
-          { opacity: 0.3, scale: 1.06 },
+          { opacity: 0.3, x: imageInX, scale: 1.04 },
           { 
             opacity: 1, 
+            x: 0,
             scale: 1, 
             duration: 0.8, 
             ease: 'power2.out',
@@ -101,17 +109,17 @@ export function HomePage() {
   };
 
   const handleNextSlide = () => {
-    changeSlide((currentSlide + 1) % HERO_SLIDES.length);
+    changeSlide((currentSlide + 1) % HERO_SLIDES.length, 'next');
   };
 
   const handlePrevSlide = () => {
-    changeSlide((currentSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    changeSlide((currentSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length, 'prev');
   };
 
   // Autoplay with 10 seconds delay - resets automatically when currentSlide changes
   useEffect(() => {
     const timer = setInterval(() => {
-      changeSlide((currentSlide + 1) % HERO_SLIDES.length);
+      changeSlide((currentSlide + 1) % HERO_SLIDES.length, 'next');
     }, 10000);
 
     return () => clearInterval(timer);
