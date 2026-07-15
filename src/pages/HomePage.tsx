@@ -313,12 +313,12 @@ export function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {[
             { name: 'Necklaces', image: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&q=80&w=300', query: 'Necklaces' },
             { name: 'Rings', image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=300', query: 'Rings' },
             { name: 'Bracelets', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=300', query: 'Bracelets' },
-            { name: 'Temple Sets', image: 'https://images.unsplash.com/photo-1617038227653-b1d62dc7dcf7?auto=format&fit=crop&q=80&w=300', query: 'Necklaces' },
+            { name: 'Temple Sets', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=300', query: 'Necklaces' },
             { name: 'Earrings', image: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&q=80&w=300', query: 'Earrings' },
             { name: 'Pendants', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=300', query: 'Pendants' },
             { name: 'Mangalsutra', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=300', query: 'Necklaces' },
@@ -362,7 +362,7 @@ export function HomePage() {
         </div>
 
         {/* Carousel Grid - Rounded 2xl Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {bestSellers.map((product, idx) => (
             <Link 
               key={product.id}
@@ -521,7 +521,7 @@ export function HomePage() {
           </div>
 
           {/* Column 2: Video Card (Span 5) */}
-          <div className="col-span-1 lg:col-span-5 relative aspect-[16/10] lg:aspect-auto min-h-[300px] rounded-3xl overflow-hidden border border-[#EFE6DC] bg-muted shadow-sm group">
+          <div className="col-span-1 lg:col-span-5 relative aspect-[16/10] lg:aspect-auto min-h-[300px] rounded-3xl overflow-hidden border border-[#EFE6DC] bg-muted shadow-sm group mx-auto w-full max-w-lg lg:max-w-none">
             <img 
               src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" 
               alt="Luxury jewelry close up video showcase preview"
@@ -591,7 +591,7 @@ export function HomePage() {
         </div>
 
         {/* 6 Items Grid (Clean style, rounded 2xl matching mockup) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-6">
           {newArrivals.map((product) => (
             <Link 
               key={product.id}
