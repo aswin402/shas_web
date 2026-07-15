@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Truck, RotateCcw, Lock, Headphones } from 'lucide-react';
 import logoImg from '@/assets/shaslogo.png';
+import logoDarkImg from '@/assets/shaslogodark.png';
 
 const InstagramIcon = () => (
   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +82,12 @@ export function Footer() {
               <img 
                 src={logoImg} 
                 alt="SHAS Jewellers Logo" 
-                className="h-24 w-auto object-contain mix-blend-multiply" 
+                className="dark:hidden h-24 w-auto object-contain mix-blend-multiply" 
+              />
+              <img 
+                src={logoDarkImg} 
+                alt="SHAS Jewellers Logo" 
+                className="hidden dark:inline-block h-24 w-auto object-contain" 
               />
             </Link>
             <p className="text-[#805E63] text-xs leading-relaxed max-w-xs font-sans">

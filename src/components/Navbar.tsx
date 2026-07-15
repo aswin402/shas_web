@@ -4,6 +4,7 @@ import { Heart, ShoppingBag, Search, User, ChevronDown, Truck, Award, ShieldChec
 import { useEffect, useState } from 'react';
 import { ThemeToggleButton } from '@/components/ThemeToggleButton';
 import logoImg from '@/assets/shaslogo.png';
+import logoDarkImg from '@/assets/shaslogodark.png';
 
 export function Navbar() {
   const { cart, wishlist, toggleCart } = useAppStore();
@@ -67,7 +68,14 @@ export function Navbar() {
             <img 
               src={logoImg} 
               alt="SHAS Jewellers Logo" 
-              className={`transition-all duration-500 w-auto object-contain mix-blend-multiply ${
+              className={`dark:hidden transition-all duration-500 w-auto object-contain mix-blend-multiply ${
+                isScrolled ? 'h-12' : 'h-20'
+              }`}
+            />
+            <img 
+              src={logoDarkImg} 
+              alt="SHAS Jewellers Logo" 
+              className={`hidden dark:block transition-all duration-500 w-auto object-contain ${
                 isScrolled ? 'h-12' : 'h-20'
               }`}
             />
