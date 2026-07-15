@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAppStore } from '@/store/useAppStore';
-import { Heart, ShoppingBag, Search, User, ChevronDown, Truck, Award, ShieldCheck, Lock } from 'lucide-react';
+import { Heart, ShoppingBag, Search, User, ChevronDown, Truck, Award, ShieldCheck, Lock, Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ThemeToggleButton } from '@/components/ThemeToggleButton';
 import logoImg from '@/assets/shaslogo.png';
@@ -10,6 +10,7 @@ export function Navbar() {
   const { cart, wishlist, toggleCart } = useAppStore();
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const wishlistCount = wishlist.length;
@@ -138,6 +139,15 @@ export function Navbar() {
 
         {/* Action triggers */}
         <div className="flex items-center gap-2.5 md:gap-4 text-[#2A2A2A] flex-shrink-0">
+          {/* Hamburger Menu Toggle (Mobile only) */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="p-1.5 hover:text-[#C79A3B] transition-colors lg:hidden flex items-center justify-center"
+            title="Toggle Navigation Menu"
+          >
+            <Menu className="w-4.5 h-4.5 text-[#2A2A2A]" />
+          </button>
+
           {/* Search Trigger */}
           <button className="p-1.5 hover:text-[#C79A3B] transition-colors" title="Search">
             <Search className="w-4.5 h-4.5" />
@@ -178,6 +188,97 @@ export function Navbar() {
           <ThemeToggleButton />
         </div>
       </nav>
+
+      {/* Mobile Navigation Drawer */}
+      <div 
+        className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        <div 
+          className={`absolute top-0 left-0 bottom-0 w-[280px] sm:w-[320px] bg-[#F8F6F2] dark:bg-[#16141D] p-6 shadow-2xl transition-transform duration-300 flex flex-col justify-between ${
+            isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="space-y-6">
+            <div className="flex justify-between items-center pb-4 border-b border-[#EFE6DC] dark:border-[#332D40]">
+              <span className="font-heading text-sm font-bold text-[#5C0F24] dark:text-[#C79A3B] tracking-wider uppercase">Menu</span>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-1 text-[#805E63] hover:text-[#C79A3B] transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-4 font-heading text-xs uppercase tracking-widest text-[#2A2A2A] dark:text-[#F5F3F7]">
+              <Link 
+                to="/" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                Home
+              </Link>
+              <Link 
+                to="/catalog" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                Collections
+              </Link>
+              <Link 
+                to="/catalog?metal=22K+Yellow+Gold" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                Gold Jewellery
+              </Link>
+              <Link 
+                to="/catalog?metal=18K+Rose+Gold" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                Silver Jewellery
+              </Link>
+              <Link 
+                to="/catalog?category=Necklaces" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                Temple Jewellery
+              </Link>
+              <Link 
+                to="/catalog" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                Bridal
+              </Link>
+              <Link 
+                to="/about" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors border-b border-[#EFE6DC]/40 dark:border-[#332D40]/20"
+              >
+                About Us
+              </Link>
+              <Link 
+                to="/contact" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2 hover:text-[#C79A3B] transition-colors"
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile menu brand footer */}
+          <div className="pt-6 border-t border-[#EFE6DC] dark:border-[#332D40] text-center font-heading text-[9px] uppercase tracking-widest text-[#805E63] dark:text-[#B5939D]">
+            SHAS Jewellers
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
