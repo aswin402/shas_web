@@ -178,7 +178,7 @@ export function HomePage() {
       {/* 1. HERO SECTION */}
       <section 
         ref={heroRef}
-        className="relative min-h-[450px] lg:h-[650px] mt-0 lg:mt-8 bg-[#F8F6F2] flex items-center overflow-hidden"
+        className="relative min-h-[450px] lg:h-[720px] mt-0 lg:mt-8 bg-[#F8F6F2] flex items-center overflow-hidden"
       >
         {/* Left column content aligned to container grid */}
         <div className="w-full max-w-[1560px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 flex flex-col lg:flex-row items-center h-full">
