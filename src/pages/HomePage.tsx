@@ -22,12 +22,79 @@ const HeadingDivider = () => (
   <div className="flex-grow h-[1px] bg-[#C79A3B]/40 ml-4 max-w-[80px]" />
 );
 
+const HERO_SLIDES = [
+  {
+    title: "Crafted to\nCelebrate Every\nMoment",
+    subtitle: "Timeless jewelry, made to shine with you.",
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200",
+    linkText: "Shop Collection",
+    linkUrl: "/catalog"
+  },
+  {
+    title: "Heritage in\nEvery Single\nCarat",
+    subtitle: "Experience traditional luxury designed by Deepa Sakthi.",
+    image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&q=80&w=1200",
+    linkText: "Explore Gold",
+    linkUrl: "/catalog?category=Necklaces"
+  },
+  {
+    title: "Emotions Set\nin Precious\nGold & Gems",
+    subtitle: "Every piece you own carries a story, a memory to cherish forever.",
+    image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=1200",
+    linkText: "View Catalog",
+    linkUrl: "/catalog"
+  }
+];
+
 export function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   
   const { addToCart, toggleCart, toggleWishlist, wishlist } = useAppStore();
   const [email, setEmail] = useState('');
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    slideTimerRef.current = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+    }, 3000);
+  };
+
+  const stopAutoplay = () => {
+    if (slideTimerRef.current) {
+      clearInterval(slideTimerRef.current);
+    }
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+    startAutoplay();
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide(prev => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    startAutoplay();
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, []);
+
+  // Slide transition animation
+  useEffect(() => {
+    gsap.fromTo('.hero-text-slide', 
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
+    );
+    
+    gsap.fromTo('.hero-image-slide',
+      { opacity: 0.4, scale: 1.05 },
+      { opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' }
+    );
+  }, [currentSlide]);
 
   const bestSellers = PRODUCTS.filter(p => p.tag === 'Best Seller').slice(0, 5);
   const newArrivals = PRODUCTS.filter(p => p.tag === 'New Arrival').slice(0, 6);
@@ -88,22 +155,22 @@ export function HomePage() {
         <div className="w-full max-w-[1560px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-[45%] text-left space-y-8 py-12 lg:py-24">
             <div className="space-y-4">
-              <h1 className="hero-text-anim text-4xl sm:text-5xl lg:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
-                Crafted to <br />
-                Celebrate Every <br />
-                Moment
+              <h1 className="hero-text-slide text-4xl sm:text-5xl lg:text-[68px] font-heading font-light leading-[1.08] tracking-tight text-[#5C0F24]">
+                {HERO_SLIDES[currentSlide].title.split('\n').map((line, i) => (
+                  <span key={i} className="block">{line}</span>
+                ))}
               </h1>
-              <p className="hero-text-anim text-sm sm:text-base leading-relaxed text-[#805E63] font-sans max-w-md">
-                Timeless jewelry, made to shine with you.
+              <p className="hero-text-slide text-sm sm:text-base leading-relaxed text-[#805E63] font-sans max-w-md">
+                {HERO_SLIDES[currentSlide].subtitle}
               </p>
             </div>
             
-            <div className="hero-text-anim flex flex-wrap gap-4 pt-2">
+            <div className="hero-text-slide flex flex-wrap gap-4 pt-2">
               <Link 
-                to="/catalog" 
+                to={HERO_SLIDES[currentSlide].linkUrl}
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C79A3B] hover:bg-[#5C0F24] text-[#F8F6F2] uppercase tracking-wider text-xs font-semibold transition-all duration-300 shadow-md hover:shadow-lg rounded-none"
               >
-                Shop Collection &rarr;
+                {HERO_SLIDES[currentSlide].linkText} &rarr;
               </Link>
             </div>
 
@@ -144,15 +211,27 @@ export function HomePage() {
         <div className="hero-image-anim absolute right-0 top-16 bottom-0 w-full lg:w-[50%] xl:w-[54%] h-[calc(100%-64px)] z-0 hidden lg:block">
           <div className="w-full h-full relative overflow-hidden rounded-l-[45%_50%] border-l border-[#C79A3B]/10 shadow-2xl bg-white">
             <img
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200"
-              alt="Model wearing luxury diamond necklace with soft lighting"
-              className="w-full h-full object-cover"
+              src={HERO_SLIDES[currentSlide].image}
+              alt="Luxury jewelry design showcase"
+              className="hero-image-slide w-full h-full object-cover"
             />
             {/* Minimal slider navigation overlay */}
             <div className="absolute bottom-8 right-8 bg-[#F8F6F2]/90 backdrop-blur-md border border-[#EFE6DC] px-5 py-2.5 flex items-center gap-4 text-[10px] uppercase tracking-widest font-semibold text-[#5C0F24] rounded-full shadow-md pointer-events-auto">
-              <button className="hover:text-[#C79A3B] transition-colors">&larr;</button>
-              <span>1 / 3</span>
-              <button className="hover:text-[#C79A3B] transition-colors">&rarr;</button>
+              <button 
+                onClick={handlePrevSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Previous slide"
+              >
+                &larr;
+              </button>
+              <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
+              <button 
+                onClick={handleNextSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Next slide"
+              >
+                &rarr;
+              </button>
             </div>
           </div>
         </div>
@@ -161,14 +240,26 @@ export function HomePage() {
         <div className="w-full lg:hidden px-6 pb-16 relative z-10">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-[#C79A3B]/20 shadow-lg bg-white p-1">
             <img
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800"
-              alt="Model wearing luxury diamond necklace with soft lighting"
-              className="w-full h-full object-cover rounded-2xl"
+              src={HERO_SLIDES[currentSlide].image}
+              alt="Luxury jewelry design showcase mobile"
+              className="hero-image-slide w-full h-full object-cover rounded-2xl"
             />
             <div className="absolute bottom-4 right-4 bg-[#F8F6F2]/90 backdrop-blur-sm border border-[#EFE6DC] px-4 py-2 flex items-center gap-3 text-[9px] uppercase tracking-wider font-semibold text-[#5C0F24] rounded-full shadow-sm">
-              <button className="hover:text-[#C79A3B] transition-colors">&larr;</button>
-              <span>1 / 3</span>
-              <button className="hover:text-[#C79A3B] transition-colors">&rarr;</button>
+              <button 
+                onClick={handlePrevSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Previous slide"
+              >
+                &larr;
+              </button>
+              <span>{currentSlide + 1} / {HERO_SLIDES.length}</span>
+              <button 
+                onClick={handleNextSlide} 
+                className="hover:text-[#C79A3B] transition-colors cursor-pointer"
+                title="Next slide"
+              >
+                &rarr;
+              </button>
             </div>
           </div>
         </div>
