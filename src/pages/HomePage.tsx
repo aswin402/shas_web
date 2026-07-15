@@ -237,7 +237,7 @@ export function HomePage() {
         </div>
 
         {/* Right side absolute full-bleed image on desktop */}
-        <div className="hero-image-anim absolute right-0 top-16 bottom-0 w-full lg:w-[50%] xl:w-[54%] h-[calc(100%-64px)] z-0 hidden lg:block">
+        <div className="hero-image-anim absolute right-0 top-16 bottom-0 w-full lg:w-[44%] xl:w-[48%] h-[calc(100%-64px)] z-0 hidden lg:block">
           <div className="w-full h-full relative overflow-hidden rounded-l-[45%_50%] border-l border-[#C79A3B]/10 shadow-2xl bg-white">
             <img
               src={HERO_SLIDES[currentSlide].image}
@@ -267,7 +267,7 @@ export function HomePage() {
 
         {/* Mobile-only relative image block */}
         <div className="w-full lg:hidden px-6 pb-16 relative z-10">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-[#C79A3B]/20 shadow-lg bg-white p-1">
+          <div className="relative aspect-[4/3] w-full max-w-sm mx-auto overflow-hidden rounded-3xl border border-[#C79A3B]/20 shadow-lg bg-white p-1">
             <img
               src={HERO_SLIDES[currentSlide].image}
               alt="Luxury jewelry design showcase mobile"
